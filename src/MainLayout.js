@@ -8,7 +8,7 @@ export default class MainLayout extends Component {
   state = {
     election: 'npe2019',
     ballot: 'nat',
-    level: 'vd',
+    level: 'muni',
     theme: 'leading'
   }
 
