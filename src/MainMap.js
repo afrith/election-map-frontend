@@ -75,6 +75,15 @@ export default class MainMap extends Component {
     }
   }, 25)
 
+  _handleMapClick = (map, event) => {
+    const features = event.point ? map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === 'structure-fill') : []
+    if (features.length > 0) {
+      console.log(`clicked on ${features[0].properties.code}`)
+    } else {
+      console.log('clicked on no feature')
+    }
+  }
+
   render () {
     const { hoverCode } = this.state
     return (
@@ -85,6 +94,7 @@ export default class MainMap extends Component {
           style="mapbox://styles/mapbox/light-v9"
           zoom={defaultZoom} center={defaultCenter}
           onMouseMove={this._handleMapMouseMove}
+          onClick={this._handleMapClick}
         >
           {source}
           {layers}
