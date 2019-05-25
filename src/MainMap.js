@@ -40,13 +40,15 @@ export default class MainMap extends Component {
   }, 25)
 
   _handleMapClick = (map, event) => {
-    const { level, election } = this.props
+    const { level, election, onFeatureSelected } = this.props
+    if (!onFeatureSelected) return;
+
     const layerName = `${level}_${election}_fill`
     const features = event.point ? map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === layerName) : []
     if (features.length > 0) {
-      console.log(`clicked on ${features[0].properties.code}`)
+      onFeatureSelected(features[0].properties.code)
     } else {
-      console.log('clicked on no feature')
+      onFeatureSelected(null)
     }
   }
 
@@ -124,8 +126,30 @@ export default class MainMap extends Component {
     )
   )
 
+  _getSelectedLayer = memoize(
+    (election, level, selected) => (
+      <Layer
+        id={`${level}_${election}_selected`}
+        key={`${level}_${election}_selected`}
+        type="line"
+        sourceId={`${level}_${election}`}
+        sourceLayer={`${level}_${election}`}
+        filter={["==", "code", selected]}
+        layout={{
+          "line-cap": "butt",
+          "line-join": "bevel"
+        }}
+        paint={{
+          "line-color": "rgb(255,0,0)",
+          "line-width": 2,
+          "line-opacity": 1
+        }}
+      />
+    )
+  )
+
   render () {
-    const { election, ballot, level } = this.props
+    const { election, ballot, level, selected } = this.props
     const { hoverCode } = this.state
     return (
       <div className="map-container">
@@ -140,7 +164,8 @@ export default class MainMap extends Component {
           {this._getSource(election, level)}
           {this._getFillLayer(election, ballot, level)}
           {this._getLineLayer(election, level)}
-          {hoverCode ? this._getHoverLayer(election, level, hoverCode) : null}
+          {(hoverCode && hoverCode !== selected) ? this._getHoverLayer(election, level, hoverCode) : null}
+          {selected ? this._getSelectedLayer(election, level, selected) : null}
         </ReactMap>
       </div>
     )

@@ -10,6 +10,7 @@ function App() {
   return (
     <Switch>
       <Redirect exact path="/" to="/npe2019/nat/muni/leading" />
+      <Route path="/:election/:ballot/:level/:theme/:selected" component={MainLayout} />
       <Route path="/:election/:ballot/:level/:theme" component={MainLayout} />
     </Switch>
   );

@@ -4,19 +4,20 @@ import { generatePath } from 'react-router'
 
 import MainMap from './MainMap'
 import Settings from './Settings'
+import InfoDrawer from './InfoDrawer'
 
 export default class MainLayout extends Component {
   _replacePath = (params) => {
     const { match, history} = this.props
     const currentParams = match.params
     const newParams = {...currentParams, ...params}
-    const newPath = generatePath('/:election/:ballot/:level/:theme', newParams)
+    const pathTemplate = newParams.selected ? '/:election/:ballot/:level/:theme/:selected' : '/:election/:ballot/:level/:theme'
+    const newPath = generatePath(pathTemplate, newParams)
     history.push(newPath + window.location.hash)
   }
 
   render () {
-    const { match } = this.props
-    const { election, ballot, level, theme } = match.params
+    const { election, ballot, level, theme, selected } = this.props.match.params
 
     const settings = (
       <Settings 
@@ -35,7 +36,14 @@ export default class MainLayout extends Component {
         drawerTitle="Settings"
         drawerChildren={settings}
       >
-        <MainMap election={election} ballot={ballot} level={level} />
+        <MainMap
+          election={election} ballot={ballot} level={level} selected={selected}
+          onFeatureSelected={(selected) => this._replacePath({selected})}
+        />
+        <InfoDrawer
+          election={election} ballot={ballot} level={level} selected={selected}
+          onClose={() => this._replacePath({selected: null})}
+        />
       </NavigationDrawer>
     )
   }
