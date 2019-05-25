@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactMapboxGl, { Source, Layer } from 'react-mapbox-gl'
 import { throttle } from 'lodash'
+import memoize from 'memoize-one'
 
 import { leadingPartyColor } from './util/styles'
 
@@ -14,52 +15,6 @@ const ReactMap = ReactMapboxGl({
 
 const defaultZoom = [5]
 const defaultCenter = [25,-28.5]
-
-const source = (
-  <Source
-    id="vdistrict"
-    tileJsonSource={{
-      "type": "vector",
-      "tiles": [`http://localhost:4000/vd_2019/{z}/{x}/{y}/tile.mvt`],
-      "minzoom": 0,
-      "maxzoom": 19
-    }}
-    geoJSONSourceOptions={{ generateId: true }}
-  />)
-  
-const layers = [
-  <Layer
-    id="structure-fill"
-    key="structure-fill"
-    type="fill"
-    sourceId="vdistrict"
-    sourceLayer="vd_2019"
-    paint={{
-      "fill-color": leadingPartyColor('nat'),
-      "fill-opacity": ["case",
-        ["boolean", ["feature-state", "hover"], false],
-        1,
-        0.5
-      ]
-    }}
-  />,
-  <Layer
-    id="structure-line"
-    key="structure-line"
-    type="line"
-    sourceId="vdistrict"
-    sourceLayer="vd_2019"
-    layout={{
-      "line-cap": "butt",
-      "line-join": "bevel"
-    }}
-    paint={{
-      "line-color": "rgb(150,150,150)",
-      "line-width": 0.5,
-      "line-opacity": 1
-    }}
-  />
-]
 
 export default class MainMap extends Component {
   state = {
@@ -84,8 +39,83 @@ export default class MainMap extends Component {
     }
   }
 
+  _getSource = memoize(
+    (election, level) => (
+      <Source
+        id={`${level}_${election}`}
+        key={`${level}_${election}`}
+        tileJsonSource={{
+          "type": "vector",
+          "tiles": [`http://localhost:4000/${level}_${election}/{z}/{x}/{y}/tile.mvt`],
+          "minzoom": 4,
+          "maxzoom": 19
+        }}
+      />
+    )
+  )
+
+  _getFillLayer = memoize(
+    (election, ballot, level) => (
+      <Layer
+        id={`${level}_${election}_fill`}
+        key={`${level}_${election}_fill`}
+        type="fill"
+        sourceId={`${level}_${election}`}
+        sourceLayer={`${level}_${election}`}
+        paint={{
+          "fill-color": leadingPartyColor(ballot),
+          "fill-opacity": 0.5
+        }}
+      />
+    )
+  )
+
+  _getLineLayer = memoize(
+    (election, level) => (
+      <Layer
+        id={`${level}_${election}_line`}
+        key={`${level}_${election}_line`}
+        type="line"
+        sourceId={`${level}_${election}`}
+        sourceLayer={`${level}_${election}`}
+        layout={{
+          "line-cap": "butt",
+          "line-join": "bevel"
+        }}
+        paint={{
+          "line-color": "rgb(150,150,150)",
+          "line-width": 0.5,
+          "line-opacity": 1
+        }}
+      />
+    )
+  )
+
+  _getHoverLayer = memoize(
+    (election, level, hoverCode) => (
+      <Layer
+        id={`${level}_${election}_hover`}
+        key={`${level}_${election}_hover`}
+        type="line"
+        sourceId={`${level}_${election}`}
+        sourceLayer={`${level}_${election}`}
+        filter={["==", "code", hoverCode]}
+        layout={{
+          "line-cap": "butt",
+          "line-join": "bevel"
+        }}
+        paint={{
+          "line-color": "rgb(0,0,255)",
+          "line-width": 2,
+          "line-opacity": 1
+        }}
+      />
+    )
+  )
+
   render () {
-    const { hoverCode } = this.state
+    const { election, ballot, level } = this.props
+    //const { hoverCode } = this.state
     return (
       <div className="map-container">
         <ReactMap
@@ -96,25 +126,10 @@ export default class MainMap extends Component {
           onMouseMove={this._handleMapMouseMove}
           onClick={this._handleMapClick}
         >
-          {source}
-          {layers}
-          <Layer
-            id="hover-line"
-            key="hover-line"
-            type="line"
-            sourceId="vdistrict"
-            sourceLayer="vd_2019"
-            filter={["==", "code", hoverCode || 'dummy']}
-            layout={{
-              "line-cap": "butt",
-              "line-join": "bevel"
-            }}
-            paint={{
-              "line-color": "rgb(0,0,255)",
-              "line-width": 2,
-              "line-opacity": 1
-            }}
-          />
+          {this._getSource(election, level)}
+          {this._getFillLayer(election, ballot, level)}
+          {this._getLineLayer(election, level)}
+          {/* {hoverCode ? this._getHoverLayer(election, level, hoverCode) : null} */}
         </ReactMap>
       </div>
     )

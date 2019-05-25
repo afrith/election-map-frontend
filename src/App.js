@@ -2,11 +2,11 @@ import React from 'react';
 import './App.scss';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import MainMap from './MainMap'
+import MainLayout from './MainLayout'
 
 function App() {
   return (
-    <MainMap />
+    <MainLayout />
   );
 }
 
