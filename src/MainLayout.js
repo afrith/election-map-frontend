@@ -1,27 +1,30 @@
 import React, { Component } from 'react'
 import { NavigationDrawer } from 'react-md'
+import { generatePath } from 'react-router'
 
 import MainMap from './MainMap'
 import Settings from './Settings'
 
 export default class MainLayout extends Component {
-  state = {
-    election: 'npe2019',
-    ballot: 'nat',
-    level: 'muni',
-    theme: 'leading'
+  _replacePath = (params) => {
+    const { match, history} = this.props
+    const currentParams = match.params
+    const newParams = {...currentParams, ...params}
+    const newPath = generatePath('/:election/:ballot/:level/:theme', newParams)
+    history.push(newPath + window.location.hash)
   }
 
   render () {
-    const { election, ballot, level, theme } = this.state
+    const { match } = this.props
+    const { election, ballot, level, theme } = match.params
 
     const settings = (
       <Settings 
         election={election} ballot={ballot} level={level} theme={theme}
-        onChangeElection={election => this.setState({election})}
-        onChangeBallot={ballot => this.setState({ballot})}
-        onChangeLevel={level => this.setState({level})}
-        onChangeTheme={theme => this.setState({theme})}
+        onChangeElection={election => this._replacePath({election})}
+        onChangeBallot={ballot => this._replacePath({ballot})}
+        onChangeLevel={level => this._replacePath({level})}
+        onChangeTheme={theme => this._replacePath({theme})}
       />
     )
 
