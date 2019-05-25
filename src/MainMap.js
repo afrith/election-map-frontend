@@ -66,7 +66,7 @@ export default class MainMap extends Component {
     hoverCode: null
   }
 
-  onMouseMove = throttle((map, event) => {
+  _handleMapMouseMove = throttle((map, event) => {
     if (map.getZoom() >= 8 && event.point) {
       const features = map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === 'structure-fill')
       this.setState({hoverCode: features.length > 0 ? features[0].properties.code : null})
@@ -84,7 +84,7 @@ export default class MainMap extends Component {
           // eslint-disable-next-line react/style-prop-object
           style="mapbox://styles/mapbox/light-v9"
           zoom={defaultZoom} center={defaultCenter}
-          onMouseMove={this.onMouseMove}
+          onMouseMove={this._handleMapMouseMove}
         >
           {source}
           {layers}
