@@ -22,8 +22,17 @@ export default class MainMap extends Component {
   }
 
   _handleMapMouseMove = throttle((map, event) => {
-    if (map.getZoom() >= 8 && event.point) {
-      const features = map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === 'structure-fill')
+    const { level, election } = this.props
+    const zoom = map.getZoom()
+
+    if ((level === 'vd' && zoom < 8) || (level === 'ward' && zoom < 6)) {
+      this.setState({hoverCode: null})
+      return
+    }
+
+    const layerName = `${level}_${election}_fill`
+    if (event.point) {
+      const features = map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === layerName)
       this.setState({hoverCode: features.length > 0 ? features[0].properties.code : null})
     } else {
       this.setState({hoverCode: null})
@@ -31,7 +40,9 @@ export default class MainMap extends Component {
   }, 25)
 
   _handleMapClick = (map, event) => {
-    const features = event.point ? map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === 'structure-fill') : []
+    const { level, election } = this.props
+    const layerName = `${level}_${election}_fill`
+    const features = event.point ? map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === layerName) : []
     if (features.length > 0) {
       console.log(`clicked on ${features[0].properties.code}`)
     } else {
@@ -115,7 +126,7 @@ export default class MainMap extends Component {
 
   render () {
     const { election, ballot, level } = this.props
-    //const { hoverCode } = this.state
+    const { hoverCode } = this.state
     return (
       <div className="map-container">
         <ReactMap
@@ -129,7 +140,7 @@ export default class MainMap extends Component {
           {this._getSource(election, level)}
           {this._getFillLayer(election, ballot, level)}
           {this._getLineLayer(election, level)}
-          {/* {hoverCode ? this._getHoverLayer(election, level, hoverCode) : null} */}
+          {hoverCode ? this._getHoverLayer(election, level, hoverCode) : null}
         </ReactMap>
       </div>
     )
