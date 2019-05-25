@@ -59,7 +59,7 @@ export default class MainMap extends Component {
         key={`${level}_${election}`}
         tileJsonSource={{
           "type": "vector",
-          "tiles": [`http://localhost:4000/${level}_${election}/{z}/{x}/{y}/tile.mvt`],
+          "tiles": [`http://localhost:4000/tiles/${level}_${election}/{z}/{x}/{y}/tile.mvt`],
           "minzoom": 4,
           "maxzoom": 19
         }}
