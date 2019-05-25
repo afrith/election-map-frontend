@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactMapboxGl, { Source, Layer } from 'react-mapbox-gl'
+import { throttle } from 'lodash'
 
 import { leadingPartyColor } from './util/styles'
 
@@ -65,7 +66,17 @@ export default class MainMap extends Component {
     hoverCode: null
   }
 
+  onMouseMove = throttle((map, event) => {
+    if (map.getZoom() >= 8 && event.point) {
+      const features = map.queryRenderedFeatures(event.point).filter(feature => feature.layer.id === 'structure-fill')
+      this.setState({hoverCode: features.length > 0 ? features[0].properties.code : null})
+    } else {
+      this.setState({hoverCode: null})
+    }
+  }, 25)
+
   render () {
+    const { hoverCode } = this.state
     return (
       <div className="map-container">
         <ReactMap
@@ -77,6 +88,23 @@ export default class MainMap extends Component {
         >
           {source}
           {layers}
+          <Layer
+            id="hover-line"
+            key="hover-line"
+            type="line"
+            sourceId="vdistrict"
+            sourceLayer="vd_2019"
+            filter={["==", "code", hoverCode || 'dummy']}
+            layout={{
+              "line-cap": "butt",
+              "line-join": "bevel"
+            }}
+            paint={{
+              "line-color": "rgb(0,0,255)",
+              "line-width": 2,
+              "line-opacity": 1
+            }}
+          />
         </ReactMap>
       </div>
     )
