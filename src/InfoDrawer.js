@@ -23,7 +23,7 @@ const formatPerc = x => `${formatDec(x * 100)}%`;
 const DrawerContents = props => {
   const { data } = props
   return <div>
-    <h3>{data.name}</h3>
+    <div><span className="md-title" style={{whiteSpace: 'normal'}}>{data.name}</span> <span className="md-subheading-2">({data.code})</span></div>
     <DataTable plain responsive>
       <TableHeader>
         <TableRow>
