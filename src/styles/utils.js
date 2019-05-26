@@ -14,9 +14,9 @@ export const buildLeadingPartyExpression = (ballot, partyColors, otherColors) =>
     'match',
     ['get', `${ballot}_win_party`]
   ]
-  for (const party in partyColors) {
-    styleExpr.push(party)
-    styleExpr.push(arrayToStep(ballot, partyColors[party]))
+  for (const row of partyColors) {
+    styleExpr.push(row.abbr)
+    styleExpr.push(arrayToStep(ballot, row.colors))
   }
   styleExpr.push(arrayToStep(ballot, otherColors))
   return styleExpr
