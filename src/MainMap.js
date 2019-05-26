@@ -101,7 +101,13 @@ export default class MainMap extends Component {
         }}
         paint={{
           "line-color": "rgb(150,150,150)",
-          "line-width": 0.5,
+          "line-width": [
+            'interpolate',
+            ['exponential', 2],
+            ['zoom'],
+            4, 0.25,
+            14, 2
+          ],
           "line-opacity": 1
         }}
       />
