@@ -24,10 +24,10 @@ export const buildLeadingPartyExpression = (ballot, partyColors, otherColors) =>
   return styleExpr
 }
 
-const makeRow = (abbr, colors) => (
-  <tr key={abbr}>
-    <td>{abbr}</td>
-    {colors.map((color, idx) => <td key={idx} style={{backgroundColor: color, opacity: 0.5}}></td>)}
+const makeRow = (rowData) => (
+  <tr key={rowData.abbr}>
+    <td>{rowData.name ? <abbr title={rowData.name}>{rowData.displayAbbr || rowData.abbr}</abbr> : (rowData.displayAbbr || rowData.abbr)}</td>
+    {rowData.colors.map((color, idx) => <td key={idx} style={{backgroundColor: color, opacity: 0.5}}></td>)}
   </tr>
 )
 
@@ -46,8 +46,8 @@ export const buildLeadingPartyLegend = (partyColors, otherColors) => {
         </tr>
       </thead>
       <tbody>
-        {partyColors.map(row => makeRow(row.abbr, row.colors))}
-        {makeRow('Other', otherColors)}
+        {partyColors.map(makeRow)}
+        {makeRow({abbr: 'Other', colors: otherColors})}
       </tbody>
     </table>
   )
