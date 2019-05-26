@@ -5,6 +5,7 @@ import memoize from 'memoize-one'
 
 import { styleExpression as leadingParty } from './styles/leadingParty'
 import { styleExpression as colorBlind } from './styles/colorBlind'
+import { styleExpression as partySupport } from './styles/partySupport'
 
 const ReactMap = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
@@ -75,8 +76,17 @@ export default class MainMap extends Component {
   _getFillLayer = memoize(
     (election, ballot, level, theme) => {
       let colorExpr = '#c0c0c0'
-      if (theme === 'leading') colorExpr = leadingParty(ballot)
-      else if (theme === 'leading-cb') colorExpr = colorBlind(ballot)
+      if (theme === 'leading') {
+        colorExpr = leadingParty(ballot)
+      } else if (theme === 'leading-cb') {
+        colorExpr = colorBlind(ballot)
+      //else if (theme === 'anc-support') colorExpr = partySupport(ballot, 'anc')
+      } else {
+        const match = theme.match(/^(.*)-support$/)
+        if (match) {
+          colorExpr = partySupport(ballot, match[1])
+        }
+      }
 
       return <Layer
         id={`${level}_${election}_fill`}

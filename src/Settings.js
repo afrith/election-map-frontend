@@ -3,6 +3,7 @@ import { SelectField } from 'react-md'
 
 import { legend as leadingParty } from './styles/leadingParty'
 import { legend as colorBlind } from './styles/colorBlind'
+import { legend as partySupport, partyList } from './styles/partySupport'
 
 const elections = [
   {value: 'npe2019', label: 'NPE 2019'},
@@ -21,13 +22,15 @@ const levels = [
 
 const themes = [
   {value: 'leading', label: 'Leading party'},
-  {value: 'leading-cb', label: 'Leading party, color blind friendly'}
+  {value: 'leading-cb', label: 'Leading party, color blind friendly'},
 ]
+themes.push(...partyList.map(row => ({value: `${row.code}-support`, label: `${row.abbr} support`})))
 
 const legends = {
   'leading': leadingParty,
   'leading-cb': colorBlind
 }
+partyList.forEach(row => {legends[`${row.code}-support`] = partySupport(row.code)})
 
 export default (props) => {
   const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme } = props
