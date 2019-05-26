@@ -1,6 +1,9 @@
 import React from 'react'
 import { SelectField } from 'react-md'
 
+import { legend as leadingParty } from './styles/leadingParty'
+import { legend as colorBlind } from './styles/colorBlind'
+
 const elections = [
   {value: 'npe2019', label: 'NPE 2019'},
   {value: 'npe2014', label: 'NPE 2014'},
@@ -21,6 +24,11 @@ const themes = [
   {value: 'leading-cb', label: 'Leading party, color blind friendly'}
 ]
 
+const legends = {
+  'leading': leadingParty,
+  'leading-cb': colorBlind
+}
+
 export default (props) => {
   const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme } = props
   return (
@@ -34,8 +42,7 @@ export default (props) => {
           value={election}
           onChange={value => onChangeElection ? onChangeElection(value) : null}
         />
-      </div>
-      <div className="md-cell md-cell--12">
+
         <SelectField
           id="select-ballot"
           label="Ballot"
@@ -44,8 +51,7 @@ export default (props) => {
           value={ballot}
           onChange={value => onChangeBallot ? onChangeBallot(value) : null}
         />
-      </div>
-      <div className="md-cell md-cell--12">
+
         <SelectField
           id="select-level"
           label="Level of detail"
@@ -54,8 +60,7 @@ export default (props) => {
           value={level}
           onChange={value => onChangeLevel ? onChangeLevel(value) : null}
         />
-      </div>
-      <div className="md-cell md-cell--12">
+
         <SelectField
           id="select-theme"
           label="Colour scheme"
@@ -64,6 +69,10 @@ export default (props) => {
           value={theme}
           onChange={value => onChangeTheme ? onChangeTheme(value) : null}
         />
+      </div>
+      <div className="md-cell md-cell--12">
+        <h4>Legend</h4>
+        {legends[theme]}
       </div>
     </div>
   )
