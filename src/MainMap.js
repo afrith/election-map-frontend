@@ -148,6 +148,11 @@ export default class MainMap extends Component {
     )
   )
 
+  // catch dodgy MapboxGL errors
+  componentDidCatch(error, info) {
+    console.log(error, info)
+  }
+
   render () {
     const { election, ballot, level, selected } = this.props
     const { hoverCode } = this.state
