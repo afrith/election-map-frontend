@@ -8,6 +8,8 @@ import { leadingPartyColor, leadingPartyColorblindColor } from './util/styles'
 const ReactMap = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
   hash: true,
+  minZoom: 4,
+  maxZoom: 18,
   dragRotate: false,
   pitchWithRotate: false,
   touchZoomRotate: false
@@ -61,7 +63,7 @@ export default class MainMap extends Component {
           "type": "vector",
           "tiles": [`http://localhost:4000/tiles/${level}_${election}/{z}/{x}/{y}/tile.mvt`],
           "minzoom": 4,
-          "maxzoom": 19
+          "maxzoom": 18
         }}
       />
     )
