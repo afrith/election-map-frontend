@@ -35,7 +35,7 @@ const DrawerContents = props => {
       <TableBody>
         {data.parties.sort(partyCompare).map(row => (
           <TableRow key={row.abbrev}>
-            <TableColumn>{row.abbrev}</TableColumn>
+            <TableColumn><abbr title={row.name}>{row.abbrev}</abbr></TableColumn>
             <TableColumn numeric>{formatInt(row.votes)}</TableColumn>
             <TableColumn numeric>{data.valid > 0 ? formatPerc(row.votes/data.valid) : ''}</TableColumn>
           </TableRow>
