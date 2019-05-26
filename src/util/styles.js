@@ -62,3 +62,38 @@ export const leadingPartyColor = ballot => [
     90, 'rgb(37,37,37)'
   ],
 ]
+
+export const leadingPartyColorblindColor = ballot => [
+  'match',
+  ['get', `${ballot}_win_party`],
+  'ANC', [
+    'step',
+    ['get', `${ballot}_win_perc`],
+    'rgb(199, 233, 192)',
+    50, 'rgb(161, 217, 155)',
+    60, 'rgb(116, 196, 118)',
+    70, 'rgb(65, 171, 93)',
+    80, 'rgb(35, 139, 69)',
+    90, 'rgb(0, 90, 50)'
+  ],
+  'DA', [
+    'step',
+    ['get', `${ballot}_win_perc`],
+    'rgb(252,187,161)',
+    50, 'rgb(252,146,114)',
+    60, 'rgb(251,106,74)',
+    70, 'rgb(239,59,44)',
+    80, 'rgb(203,24,29)',
+    90, 'rgb(153,0,13)'
+  ],
+  [
+    'step',
+    ['get', `${ballot}_win_perc`],
+    'rgb(217,217,217)',
+    50, 'rgb(189,189,189)',
+    60, 'rgb(150,150,150)',
+    70, 'rgb(115,115,115)',
+    80, 'rgb(82,82,82)',
+    90, 'rgb(37,37,37)'
+  ],
+]

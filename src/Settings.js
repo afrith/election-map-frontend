@@ -17,7 +17,8 @@ const levels = [
 ]
 
 const themes = [
-  {value: 'leading', label: 'Leading party'}
+  {value: 'leading', label: 'Leading party'},
+  {value: 'leading-cb', label: 'Leading party, color blind friendly'}
 ]
 
 export default (props) => {

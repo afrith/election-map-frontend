@@ -3,7 +3,7 @@ import ReactMapboxGl, { Source, Layer } from 'react-mapbox-gl'
 import { throttle } from 'lodash'
 import memoize from 'memoize-one'
 
-import { leadingPartyColor } from './util/styles'
+import { leadingPartyColor, leadingPartyColorblindColor } from './util/styles'
 
 const ReactMap = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
@@ -68,19 +68,23 @@ export default class MainMap extends Component {
   )
 
   _getFillLayer = memoize(
-    (election, ballot, level) => (
-      <Layer
+    (election, ballot, level, theme) => {
+      let colorExpr = '#c0c0c0'
+      if (theme === 'leading') colorExpr = leadingPartyColor(ballot)
+      else if (theme === 'leading-cb') colorExpr = leadingPartyColorblindColor(ballot)
+
+      return <Layer
         id={`${level}_${election}_fill`}
         key={`${level}_${election}_fill`}
         type="fill"
         sourceId={`${level}_${election}`}
         sourceLayer={`${level}_${election}`}
         paint={{
-          "fill-color": leadingPartyColor(ballot),
+          "fill-color": colorExpr,
           "fill-opacity": 0.5
         }}
       />
-    )
+    }
   )
 
   _getLineLayer = memoize(
@@ -154,7 +158,7 @@ export default class MainMap extends Component {
   }
 
   render () {
-    const { election, ballot, level, selected } = this.props
+    const { election, ballot, level, theme, selected } = this.props
     const { hoverCode } = this.state
     return (
       <div className="map-container">
@@ -167,7 +171,7 @@ export default class MainMap extends Component {
           onClick={this._handleMapClick}
         >
           {this._getSource(election, level)}
-          {this._getFillLayer(election, ballot, level)}
+          {this._getFillLayer(election, ballot, level, theme)}
           {this._getLineLayer(election, level)}
           {(hoverCode && hoverCode !== selected) ? this._getHoverLayer(election, level, hoverCode) : null}
           {selected ? this._getSelectedLayer(election, level, selected) : null}

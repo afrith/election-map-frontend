@@ -37,7 +37,7 @@ export default class MainLayout extends Component {
         drawerChildren={settings}
       >
         <MainMap
-          election={election} ballot={ballot} level={level} selected={selected}
+          election={election} ballot={ballot} level={level} theme={theme} selected={selected}
           onFeatureSelected={(selected) => this._replacePath({selected})}
         />
         <InfoDrawer
