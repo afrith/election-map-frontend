@@ -42,6 +42,8 @@ export default class MainMap extends Component {
     }
   }, 25)
 
+  _handleMapMouseOut = () => { this.setState({hoverCode: null}) }
+
   _handleMapClick = (map, event) => {
     const { level, election, onFeatureSelected } = this.props
     if (!onFeatureSelected) return;
@@ -177,6 +179,7 @@ export default class MainMap extends Component {
           style="mapbox://styles/mapbox/light-v9"
           zoom={defaultZoom} center={defaultCenter}
           onMouseMove={this._handleMapMouseMove}
+          onMouseOut={this._handleMapMouseOut}
           onClick={this._handleMapClick}
         >
           {this._getSource(election, level)}
