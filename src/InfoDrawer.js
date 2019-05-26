@@ -1,5 +1,49 @@
 import React, { Component } from 'react'
-import { Drawer, Toolbar, Button } from 'react-md'
+import { Drawer, Toolbar, Button, DataTable, TableHeader, TableBody, TableRow, TableColumn } from 'react-md'
+import Fetch from 'react-fetch-component'
+
+const partyCompare = (a, b) => {
+  if (a.votes !== b.votes) return b.votes - a.votes
+  else if (a.name < b.name) return -1
+  else if (a.name > b.name) return 1
+  else return 0
+}
+
+const formatInt = x => Number(x).toLocaleString('en-GB', {
+  maximumFractionDigits: 0
+});
+
+const formatDec = x => Number(x).toLocaleString('en-GB', {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1
+});
+
+const formatPerc = x => `${formatDec(x * 100)}%`;
+
+const DrawerContents = props => {
+  const { data } = props
+  return <div>
+    <h3>{data.name}</h3>
+    <DataTable plain>
+      <TableHeader>
+        <TableRow>
+          <TableColumn>Party</TableColumn>
+          <TableColumn numeric>Votes</TableColumn>
+          <TableColumn numeric>%</TableColumn>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.parties.sort(partyCompare).map(row => (
+          <TableRow key={row.abbrev}>
+            <TableColumn>{row.abbrev}</TableColumn>
+            <TableColumn numeric>{formatInt(row.votes)}</TableColumn>
+            <TableColumn numeric>{data.valid > 0 ? formatPerc(row.votes/data.valid) : ''}</TableColumn>
+          </TableRow>
+        ))}
+      </TableBody>
+    </DataTable>
+  </div>
+}
 
 export default class InfoDrawer extends Component {
   _onCloseClick = () => {
@@ -30,9 +74,15 @@ export default class InfoDrawer extends Component {
           />
         )}
       >
-        <div className="md-grid">
+        <div style={{minWidth: 256}} className="md-list--drawer md-grid">
           <div className="md-cell md-cell--12">
-            {election} {ballot} {level} {selected}
+            {selected && <Fetch url={`http://localhost:4000/${election}/${ballot}/${level}/${selected}`}>
+              {({ loading, error, data }) => {
+                if (loading) return <div>Loading...</div>
+                else if (error) return <div>Error :(</div>
+                else return <DrawerContents data={data} />
+              }}
+            </Fetch>}
           </div>
         </div>
       </Drawer>

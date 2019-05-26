@@ -24,7 +24,7 @@ export default class MainLayout extends Component {
         election={election} ballot={ballot} level={level} theme={theme}
         onChangeElection={election => this._replacePath({election})}
         onChangeBallot={ballot => this._replacePath({ballot})}
-        onChangeLevel={level => this._replacePath({level})}
+        onChangeLevel={level => this._replacePath({level, selected: null})}
         onChangeTheme={theme => this._replacePath({theme})}
       />
     )

@@ -8472,6 +8472,11 @@ react-event-listener@^0.6.0:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-fetch-component@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/react-fetch-component/-/react-fetch-component-7.0.1.tgz#04430af5cb927c26a95b88511a86af197712583c"
+  integrity sha512-sQjf80PV+HJTJia6K6DhlIPbvIFxrxtW2T9vN/ZmsYaja11MRRlcaP0ncT/wOVO9riVT24pli1zynmG767AI9w==
+
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
