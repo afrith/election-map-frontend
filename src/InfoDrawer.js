@@ -24,7 +24,7 @@ const DrawerContents = props => {
   const { data } = props
   return <div>
     <h3>{data.name}</h3>
-    <DataTable plain>
+    <DataTable plain responsive>
       <TableHeader>
         <TableRow>
           <TableColumn>Party</TableColumn>
