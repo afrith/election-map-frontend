@@ -108,7 +108,7 @@ export default class MainMap extends Component {
             ['exponential', 2],
             ['zoom'],
             4, 0.25,
-            14, 2
+            (level === 'vd' ? 14: (level === 'ward' ? 11 : 8)), 2
           ],
           "line-opacity": 1
         }}
