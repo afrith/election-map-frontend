@@ -76,7 +76,7 @@ export default class InfoDrawer extends Component {
       >
         <div style={{minWidth: 256}} className="md-list--drawer md-grid">
           <div className="md-cell md-cell--12">
-            {selected && <Fetch url={`http://localhost:4000/${election}/${ballot}/${level}/${selected}`}>
+            {selected && <Fetch url={`${process.env.REACT_APP_API_ROOT}/${election}/${ballot}/${level}/${selected}`}>
               {({ loading, error, data }) => {
                 if (loading) return <div>Loading...</div>
                 else if (error) return <div>Error :(</div>
