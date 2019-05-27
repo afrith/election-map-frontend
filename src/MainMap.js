@@ -12,8 +12,7 @@ const ReactMap = ReactMapboxGl({
   minZoom: 4,
   maxZoom: 18,
   dragRotate: false,
-  pitchWithRotate: false,
-  touchZoomRotate: false
+  pitchWithRotate: false
 });
 
 const defaultZoom = [5]
