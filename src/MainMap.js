@@ -16,7 +16,7 @@ const ReactMap = ReactMapboxGl({
 });
 
 const defaultZoom = [5]
-const defaultCenter = [25,-28.5]
+const defaultCenter = [25.5,-28.5]
 
 export default class MainMap extends Component {
   state = {
