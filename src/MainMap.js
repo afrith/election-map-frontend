@@ -8,7 +8,6 @@ import { styleExpression as colorBlind } from './styles/colorBlind'
 import { styleExpression as partySupport } from './styles/partySupport'
 
 const ReactMap = ReactMapboxGl({
-  accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
   hash: true,
   minZoom: 4,
   maxZoom: 18,
@@ -186,7 +185,7 @@ export default class MainMap extends Component {
         <ReactMap
           containerStyle={{height: "100%", width: "100%"}}
           // eslint-disable-next-line react/style-prop-object
-          style="mapbox://styles/mapbox/light-v9"
+          style="https://maptiles.adrianfrith.com/styles/positron/style.json"
           zoom={defaultZoom} center={defaultCenter}
           onMouseMove={this._handleMapMouseMove}
           onMouseOut={this._handleMapMouseOut}
