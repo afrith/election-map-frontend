@@ -73,7 +73,8 @@ export default (props) => {
           onChange={value => onChangeTheme ? onChangeTheme(value) : null}
         />
       </div>
-      <div className="md-cell md-cell--12">
+
+      <div className="md-cell md-cell--12" style={{paddingTop: 16}}>
         <h4>Legend</h4>
         {legends[theme]}
       </div>
