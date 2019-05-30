@@ -46,19 +46,46 @@ export const legend = (party) => {
       </thead>
       <tbody>
         <tr>
-          <td style={{textAlign: 'center', backgroundColor: colors[0]}}>0&ndash;10%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[1]}}>10&ndash;20%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[2]}}>20&ndash;30%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[3]}}>30&ndash;40%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[4]}}>40&ndash;50%</td>
+          <td style={{width: '30px', backgroundColor: colors[0]}}></td>
+          <td>0&ndash;10%</td>
         </tr>
         <tr>
-          <td style={{textAlign: 'center', backgroundColor: colors[5]}}>50&ndash;60%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[6]}}>60&ndash;70%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[7]}}>70&ndash;80%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[8]}}>80&ndash;90%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[9]}}>90&ndash;100%</td>
+          <td style={{width: '30px', backgroundColor: colors[1]}}></td>
+          <td>10&ndash;20%</td>
         </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[2]}}></td>
+          <td>20&ndash;30%</td>
+        </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[3]}}></td>
+          <td>30&ndash;40%</td>
+        </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[4]}}></td>
+          <td>40&ndash;50%</td>
+        </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[5]}}></td>
+          <td>50&ndash;60%</td>
+        </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[6]}}></td>
+          <td>60&ndash;70%</td>
+        </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[7]}}></td>
+          <td>70&ndash;80%</td>
+        </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[8]}}></td>
+          <td>80&ndash;90%</td>
+        </tr>
+        <tr>
+          <td style={{width: '30px', backgroundColor: colors[9]}}></td>
+          <td>90&ndash;100%</td>
+        </tr>
+        
       </tbody>
     </table>
   )
