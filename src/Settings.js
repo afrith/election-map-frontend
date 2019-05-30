@@ -38,7 +38,7 @@ partyList.forEach(row => {legends[`${row.code}-support`] = partySupport(row.code
 const Settings = (props) => {
   const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme } = props
   return (
-    <div className="md-grid">
+    <div className="md-grid md-list--drawer">
       <div className="md-cell md-cell--12">
         <SelectField
           id="select-election"
