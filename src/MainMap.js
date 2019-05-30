@@ -6,6 +6,7 @@ import memoize from 'memoize-one'
 import { styleExpression as leadingParty } from './styles/leadingParty'
 import { styleExpression as colorBlind } from './styles/colorBlind'
 import { styleExpression as partySupport } from './styles/partySupport'
+import { styleExpression as turnout } from './styles/turnout'
 
 const ReactMap = ReactMapboxGl({
   hash: true,
@@ -78,7 +79,8 @@ export default class MainMap extends Component {
         colorExpr = leadingParty(ballot)
       } else if (theme === 'leading-cb') {
         colorExpr = colorBlind(ballot)
-      //else if (theme === 'anc-support') colorExpr = partySupport(ballot, 'anc')
+      } else if (theme === 'turnout') {
+        colorExpr = turnout(ballot)
       } else {
         const match = theme.match(/^(.*)-support$/)
         if (match) {
