@@ -47,7 +47,10 @@ export const legend = (
       </tr>
       <tr>
         <td style={{width: '30px', backgroundColor: transpColors[5]}}></td>
-        <td>&gt;100%</td>
+        <td>&gt;100%  *</td>
+      </tr>
+      <tr>
+        <td colSpan={2}>* <i>Note that turnout can exceed 100% because voters may vote at a voting station other than the one where they are registered.</i></td>
       </tr>
     </tbody>
   </table>
