@@ -15,6 +15,8 @@ export const styleExpression = (ballot) => {
   ]
 }
 
+const transpColors = colors.map(x => x.replace(/^rgb\(/, 'rgba(').replace(/\)$/, ',0.5)'))
+
 export const legend = (
   <table className='legendTable' style={{width: '100%'}}>
     <thead>
@@ -24,27 +26,27 @@ export const legend = (
     </thead>
     <tbody>
       <tr>
-        <td style={{width: '30px', backgroundColor: colors[0]}}></td>
+        <td style={{width: '30px', backgroundColor: transpColors[0]}}></td>
         <td>0&ndash;20%</td>
       </tr>
       <tr>
-        <td style={{width: '30px', backgroundColor: colors[1]}}></td>
+        <td style={{width: '30px', backgroundColor: transpColors[1]}}></td>
         <td>20&ndash;40%</td>
       </tr>
       <tr>
-        <td style={{width: '30px', backgroundColor: colors[2]}}></td>
+        <td style={{width: '30px', backgroundColor: transpColors[2]}}></td>
         <td>40&ndash;60%</td>
       </tr>
       <tr>
-        <td style={{width: '30px', backgroundColor: colors[3]}}></td>
+        <td style={{width: '30px', backgroundColor: transpColors[3]}}></td>
         <td>60&ndash;80%</td>
       </tr>
       <tr>
-        <td style={{width: '30px', backgroundColor: colors[4]}}></td>
+        <td style={{width: '30px', backgroundColor: transpColors[4]}}></td>
         <td>80&ndash;100%</td>
       </tr>
       <tr>
-        <td style={{width: '30px', backgroundColor: colors[5]}}></td>
+        <td style={{width: '30px', backgroundColor: transpColors[5]}}></td>
         <td>&gt;100%</td>
       </tr>
     </tbody>
