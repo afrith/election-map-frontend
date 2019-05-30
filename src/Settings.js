@@ -1,10 +1,12 @@
 import React from 'react'
-import { SelectField } from 'react-md'
+import { SelectField, Paper } from 'react-md'
 
 import { legend as leadingParty } from './styles/leadingParty'
 import { legend as colorBlind } from './styles/colorBlind'
 import { legend as partySupport, partyList } from './styles/partySupport'
 import { legend as turnout } from './styles/turnout'
+
+import PlaceSearch from './PlaceSearch'
 
 const elections = [
   {value: 'npe2019', label: 'NPE 2019'},
@@ -36,7 +38,7 @@ const legends = {
 partyList.forEach(row => {legends[`${row.code}-support`] = partySupport(row.code)})
 
 const Settings = (props) => {
-  const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme } = props
+  const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme, onPlaceSearched } = props
   return (
     <div className="md-grid md-list--drawer">
       <div className="md-cell md-cell--12">
@@ -77,9 +79,18 @@ const Settings = (props) => {
         />
       </div>
 
-      <div className="md-cell md-cell--12" style={{paddingTop: 16}}>
-        <h4>Legend</h4>
-        {legends[theme]}
+      <div className="md-cell md-cell--12">
+        <Paper style={{padding:8}}>
+          <h4>Legend</h4>
+          {legends[theme]}
+        </Paper>
+      </div>
+
+      <div className="md-cell md-cell--12">
+        <Paper style={{padding:8}}>
+          <h4>Search</h4>
+          <PlaceSearch onSearchResult={onPlaceSearched} />
+        </Paper>
       </div>
     </div>
   )

@@ -179,7 +179,7 @@ export default class MainMap extends Component {
   }
 
   render () {
-    const { election, ballot, level, theme, selected } = this.props
+    const { election, ballot, level, theme, selected, fitBounds } = this.props
     const { hoverCode } = this.state
     return (
       <div className="map-container">
@@ -191,6 +191,7 @@ export default class MainMap extends Component {
           onMouseMove={this._handleMapMouseMove}
           onMouseOut={this._handleMapMouseOut}
           onClick={this._handleMapClick}
+          fitBounds={fitBounds} fitBoundsOptions={{maxZoom: 16}}
         >
           {this._getSource(election, level)}
           {this._getFillLayer(election, ballot, level, theme)}

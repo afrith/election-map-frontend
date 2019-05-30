@@ -11,3 +11,17 @@ $md-drawer-desktop-width: 360px;
   max-width: 400px !important;
   left: auto !important;
 }
+
+.text-fields {
+  // The inline indicator expects an icon sized element
+  &__inline-btn.md-btn {
+    height: $md-font-icon-size;
+    padding: 0;
+    width: $md-font-icon-size;
+
+    @media #{$md-desktop-media} {
+      height: $md-font-icon-dense-size;
+      width: $md-font-icon-dense-size;
+    }
+  }
+}

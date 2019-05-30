@@ -7,6 +7,10 @@ import Settings from './Settings'
 import InfoDrawer from './InfoDrawer'
 
 export default class MainLayout extends Component {
+  state = {
+    fitBounds: null
+  }
+
   _replacePath = (params) => {
     const { match, history} = this.props
     const currentParams = match.params
@@ -18,6 +22,7 @@ export default class MainLayout extends Component {
 
   render () {
     const { election, ballot, level, theme, selected } = this.props.match.params
+    const { fitBounds } = this.state
 
     const settings = (
       <Settings 
@@ -26,6 +31,7 @@ export default class MainLayout extends Component {
         onChangeBallot={ballot => this._replacePath({ballot})}
         onChangeLevel={level => this._replacePath({level, selected: null})}
         onChangeTheme={theme => this._replacePath({theme})}
+        onPlaceSearched={({boundingBox}) => {this.setState({fitBounds: boundingBox})}}
       />
     )
 
@@ -39,6 +45,7 @@ export default class MainLayout extends Component {
         <MainMap
           election={election} ballot={ballot} level={level} theme={theme} selected={selected}
           onFeatureSelected={(selected) => this._replacePath({selected})}
+          fitBounds={fitBounds}
         />
         <InfoDrawer
           election={election} ballot={ballot} level={level} selected={selected}
