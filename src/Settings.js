@@ -35,7 +35,7 @@ const legends = {
 }
 partyList.forEach(row => {legends[`${row.code}-support`] = partySupport(row.code)})
 
-export default (props) => {
+const Settings = (props) => {
   const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme } = props
   return (
     <div className="md-grid">
@@ -84,3 +84,5 @@ export default (props) => {
     </div>
   )
 }
+
+export default Settings
