@@ -9,11 +9,11 @@ export const partyList = [
 ]
 
 const partyColors = {
-  'anc': ['rgb(247,252,245)','rgb(229,245,224)','rgb(199,233,192)','rgb(161,217,155)','rgb(116,196,118)','rgb(65,171,93)','rgb(35,139,69)','rgb(0,90,50)'],
-  'da': ['rgb(247,251,255)','rgb(222,235,247)','rgb(198,219,239)','rgb(158,202,225)','rgb(107,174,214)','rgb(66,146,198)','rgb(33,113,181)','rgb(8,69,148)'],
-  'eff': ['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(153,0,13)'],
-  'ifp': ['rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(153,0,13)'],
-  'vfplus': ['rgb(255,245,235)','rgb(254,230,206)','rgb(253,208,162)','rgb(253,174,107)','rgb(253,141,60)','rgb(241,105,19)','rgb(217,72,1)','rgb(140,45,4)']
+  'anc': ['rgb(255,255,255)','rgb(247,252,245)','rgb(229,245,224)','rgb(199,233,192)','rgb(161,217,155)','rgb(116,196,118)','rgb(65,171,93)','rgb(35,139,69)','rgb(0,109,44)','rgb(0,68,27)'],
+  'da': ['rgb(255,255,255)','rgb(247,251,255)','rgb(222,235,247)','rgb(198,219,239)','rgb(158,202,225)','rgb(107,174,214)','rgb(66,146,198)','rgb(33,113,181)','rgb(8,81,156)','rgb(8,48,107)'],
+  'eff': ['rgb(255,255,255)','rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)'],
+  'ifp': ['rgb(255,255,255)','rgb(255,245,240)','rgb(254,224,210)','rgb(252,187,161)','rgb(252,146,114)','rgb(251,106,74)','rgb(239,59,44)','rgb(203,24,29)','rgb(165,15,21)','rgb(103,0,13)'],
+  'vfplus': ['rgb(255,255,255)','rgb(255,245,235)','rgb(254,230,206)','rgb(253,208,162)','rgb(253,174,107)','rgb(253,141,60)','rgb(241,105,19)','rgb(217,72,1)','rgb(166,54,3)','rgb(127,39,4)']
 }
 
 export const styleExpression = (ballot, party) => {
@@ -22,13 +22,15 @@ export const styleExpression = (ballot, party) => {
     'step',
     ['get', `${ballot}_${party.toLowerCase()}`],
     colors[0],
-    125, colors[1],
-    250, colors[2],
-    375, colors[3],
-    500, colors[4],
-    625, colors[5],
-    750, colors[6],
-    875, colors[7]
+    10, colors[1],
+    20, colors[2],
+    30, colors[3],
+    40, colors[4],
+    50, colors[5],
+    60, colors[6],
+    70, colors[7],
+    80, colors[8],
+    90, colors[9]
   ]
 }
 
@@ -44,16 +46,18 @@ export const legend = (party) => {
       </thead>
       <tbody>
         <tr>
-          <td style={{textAlign: 'center', backgroundColor: colors[0]}}>0–12.5%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[1]}}>12.5–25%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[2]}}>25–37.5%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[3]}}>37.5–50%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[0]}}>0&ndash;10%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[1]}}>10&ndash;20%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[2]}}>20&ndash;30%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[3]}}>30&ndash;40%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[4]}}>40&ndash;50%</td>
         </tr>
         <tr>
-          <td style={{textAlign: 'center', backgroundColor: colors[4]}}>50–62.5%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[5]}}>62.5–75%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[6]}}>75–87.5%</td>
-          <td style={{textAlign: 'center', backgroundColor: colors[7]}}>87.5–100%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[5]}}>50&ndash;60%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[6]}}>60&ndash;70%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[7]}}>70&ndash;80%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[8]}}>80&ndash;90%</td>
+          <td style={{textAlign: 'center', backgroundColor: colors[9]}}>90&ndash;100%</td>
         </tr>
       </tbody>
     </table>
