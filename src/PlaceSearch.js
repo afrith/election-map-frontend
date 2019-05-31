@@ -58,7 +58,7 @@ export default class PlaceSearch extends Component {
       <form onSubmit={this.handleSubmit}>
         <TextField
           id="placeSearch"
-          label="Search for a place"
+          placeholder="Search for a place"
           inlineIndicator={<Button
             icon
             type="submit"
