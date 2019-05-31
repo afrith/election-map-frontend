@@ -99,7 +99,7 @@ const Settings = (props) => {
         <div className="md-cell md-cell--12">
           <Paper style={{padding:8}}>
             <div><small><i>
-                Developed by <a href="https://adrianfrith.com/">Adrian Frith</a>.
+                Developed by <a href="https://adrianfrith.com/">Adrian Frith</a>; <a href="https://github.com/afrith/election-map-frontend">the code is on GitHub</a>.
                 Data from public election result reports.
                 This site is not affiliated with the Electoral Commission.
               </i></small></div>
