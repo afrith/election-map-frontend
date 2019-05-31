@@ -36,7 +36,6 @@ export default class MainMap extends Component {
   }
 
   _handleResize = (event) => {
-    console.log(event)
     if (this._map) {
       this._map.resize()
     }
