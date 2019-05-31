@@ -40,57 +40,61 @@ partyList.forEach(row => {legends[`${row.code}-support`] = partySupport(row.code
 const Settings = (props) => {
   const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme, onPlaceSearched } = props
   return (
-    <div className="md-grid md-list--drawer">
-      <div className="md-cell md-cell--12">
-        <SelectField
-          id="select-election"
-          label="Election"
-          menuItems={elections}
-          fullWidth
-          value={election}
-          onChange={value => onChangeElection ? onChangeElection(value) : null}
-        />
+    <div className="md-list--drawer">
+      <div className="md-grid">
+        <div className="md-cell md-cell--12">
+          <Paper style={{padding:8}}>
+            <SelectField
+              id="select-election"
+              label="Election"
+              menuItems={elections}
+              fullWidth
+              value={election}
+              onChange={value => onChangeElection ? onChangeElection(value) : null}
+            />
 
-        <SelectField
-          id="select-ballot"
-          label="Ballot"
-          menuItems={[{value: 'nat', label: 'National'}, {value: 'prov', label: 'Provincial'}]}
-          fullWidth
-          value={ballot}
-          onChange={value => onChangeBallot ? onChangeBallot(value) : null}
-        />
+            <SelectField
+              id="select-ballot"
+              label="Ballot"
+              menuItems={[{value: 'nat', label: 'National'}, {value: 'prov', label: 'Provincial'}]}
+              fullWidth
+              value={ballot}
+              onChange={value => onChangeBallot ? onChangeBallot(value) : null}
+            />
 
-        <SelectField
-          id="select-level"
-          label="Level of detail"
-          menuItems={levels}
-          fullWidth
-          value={level}
-          onChange={value => onChangeLevel ? onChangeLevel(value) : null}
-        />
+            <SelectField
+              id="select-level"
+              label="Level of detail"
+              menuItems={levels}
+              fullWidth
+              value={level}
+              onChange={value => onChangeLevel ? onChangeLevel(value) : null}
+            />
 
-        <SelectField
-          id="select-theme"
-          label="Colour scheme"
-          menuItems={themes}
-          fullWidth
-          value={theme}
-          onChange={value => onChangeTheme ? onChangeTheme(value) : null}
-        />
-      </div>
+            <SelectField
+              id="select-theme"
+              label="Colour scheme"
+              menuItems={themes}
+              fullWidth
+              value={theme}
+              onChange={value => onChangeTheme ? onChangeTheme(value) : null}
+            />
+          </Paper>
+        </div>
 
-      <div className="md-cell md-cell--12">
-        <Paper style={{padding:8}}>
-          <h4>Legend</h4>
-          {legends[theme]}
-        </Paper>
-      </div>
+        <div className="md-cell md-cell--12">
+          <Paper style={{padding:8}}>
+            <h4>Legend</h4>
+            {legends[theme]}
+          </Paper>
+        </div>
 
-      <div className="md-cell md-cell--12">
-        <Paper style={{padding:8}}>
-          <h4>Search</h4>
-          <PlaceSearch onSearchResult={onPlaceSearched} />
-        </Paper>
+        <div className="md-cell md-cell--12">
+          <Paper style={{padding:8}}>
+            <h4>Search</h4>
+            <PlaceSearch onSearchResult={onPlaceSearched} />
+          </Paper>
+        </div>
       </div>
     </div>
   )
