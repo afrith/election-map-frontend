@@ -95,6 +95,16 @@ const Settings = (props) => {
             <PlaceSearch onSearchResult={onPlaceSearched} />
           </Paper>
         </div>
+
+        <div className="md-cell md-cell--12">
+          <Paper style={{padding:8}}>
+            <div><small><i>
+                Developed by <a href="https://adrianfrith.com/">Adrian Frith</a>.
+                Data from public election result reports.
+                This site is not affiliated with the Electoral Commission.
+              </i></small></div>
+          </Paper>
+        </div>
       </div>
     </div>
   )
