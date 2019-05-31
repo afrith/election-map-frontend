@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactMapboxGl, { Source, Layer } from 'react-mapbox-gl'
 import { throttle } from 'lodash'
 import memoize from 'memoize-one'
+import { ResizeObserver } from 'react-md'
 
 import { styleExpression as leadingParty } from './styles/leadingParty'
 import { styleExpression as colorBlind } from './styles/colorBlind'
@@ -24,10 +25,20 @@ export default class MainMap extends Component {
     hoverCode: null
   }
 
+  _map = null
+
   _handleStyleLoad = map => {
+    this._map = map
     map.resize()
     if (window.location.hash === '#5/-28.5/25.5') {
       map.fitBounds([[16.25, -35], [33, -22]])
+    }
+  }
+
+  _handleResize = (event) => {
+    console.log(event)
+    if (this._map) {
+      this._map.resize()
     }
   }
 
@@ -190,6 +201,7 @@ export default class MainMap extends Component {
     const { hoverCode } = this.state
     return (
       <div className="map-container">
+        <ResizeObserver watchWidth onResize={this._handleResize} />
         <ReactMap
           containerStyle={{height: "100%", width: "100%"}}
           // eslint-disable-next-line react/style-prop-object
