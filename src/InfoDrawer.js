@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Drawer, Toolbar, Button, DataTable, TableHeader, TableBody, TableRow, TableColumn, Paper } from 'react-md'
+import { Drawer, Toolbar, Button, DataTable, TableHeader, TableBody, TableRow, TableColumn, Paper, CircularProgress } from 'react-md'
 import Fetch from 'react-fetch-component'
 
 const partyCompare = (a, b) => {
@@ -118,7 +118,7 @@ export default class InfoDrawer extends Component {
         <div style={{minWidth: 256}} className="md-list--drawer md-grid">          
           {selected && <Fetch url={`${process.env.REACT_APP_API_ROOT}/${election}/${ballot}/${level}/${selected}`}>
             {({ loading, error, data }) => {
-              if (loading) return <div className="md-cell md-cell--12">Loading...</div>
+              if (loading) return <div className="md-cell md-cell--12"><CircularProgress /></div>
               else if (error) return <div className="md-cell md-cell--12">Error :(</div>
               else return <DrawerContents data={data} />
             }}
