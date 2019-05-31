@@ -24,6 +24,13 @@ export default class MainMap extends Component {
     hoverCode: null
   }
 
+  _handleStyleLoad = map => {
+    map.resize()
+    if (window.location.hash === '#5/-28.5/25.5') {
+      map.fitBounds([[16.25, -35], [33, -22]])
+    }
+  }
+
   _handleMapMouseMove = throttle((map, event) => {
     const { level, election } = this.props
     const zoom = map.getZoom()
@@ -187,6 +194,7 @@ export default class MainMap extends Component {
           containerStyle={{height: "100%", width: "100%"}}
           // eslint-disable-next-line react/style-prop-object
           style="https://maptiles.adrianfrith.com/styles/positron/style.json"
+          onStyleLoad={this._handleStyleLoad}
           zoom={defaultZoom} center={defaultCenter}
           onMouseMove={this._handleMapMouseMove}
           onMouseOut={this._handleMapMouseOut}
