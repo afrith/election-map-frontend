@@ -37,7 +37,7 @@ export default class MainLayout extends Component {
 
     return (
       <NavigationDrawer
-        toolbarTitle="Election Results"
+        toolbarTitle="South African Election Results"
         contentStyle={{position: 'relative'}}
         drawerTitle="Settings"
         drawerChildren={settings}
