@@ -204,7 +204,7 @@ export default class MainMap extends Component {
         <ReactMap
           containerStyle={{height: "100%", width: "100%"}}
           // eslint-disable-next-line react/style-prop-object
-          style="https://maptiles.adrianfrith.com/styles/positron/style.json"
+          style="https://maptiles.frith.dev/styles/positron/style.json"
           onStyleLoad={this._handleStyleLoad}
           zoom={defaultZoom} center={defaultCenter}
           onMouseMove={this._handleMapMouseMove}
