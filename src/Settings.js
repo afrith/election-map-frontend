@@ -8,11 +8,21 @@ import { legend as turnout } from './styles/turnout'
 
 import PlaceSearch from './PlaceSearch'
 
+const electionTypes = {
+  lge: {ballots: [{value: 'pr', label: 'PR'}, {value: 'ward', label: 'Ward'}]},
+  npe: {ballots: [{value: 'nat', label: 'National'}, {value: 'prov', label: 'Provincial'}]}
+}
+
 const elections = [
+  {value: 'lge2021', label: 'LGE 2021'},
   {value: 'npe2019', label: 'NPE 2019'},
+  {value: 'lge2016', label: 'LGE 2016'},
   {value: 'npe2014', label: 'NPE 2014'},
+  {value: 'lge2011', label: 'LGE 2011'},
   {value: 'npe2009', label: 'NPE 2009'},
-  {value: 'npe2004', label: 'NPE 2004'}
+  {value: 'lge2006', label: 'LGE 2006'},
+  {value: 'npe2004', label: 'NPE 2004'},
+  {value: 'lge2000', label: 'LGE 2000'}
 ]
 
 const levels = [
@@ -37,8 +47,17 @@ const legends = {
 }
 partyList.forEach(row => {legends[`${row.code}-support`] = partySupport(row.code)})
 
+
+
 const Settings = (props) => {
   const { election, ballot, level, theme, onChangeElection, onChangeBallot, onChangeLevel, onChangeTheme, onPlaceSearched } = props
+
+  const handleChangeElection = election => {
+    const etype = election.substr(0, 3)
+    const newBallot = electionTypes[etype].ballots.some(element => element.value === ballot) ? ballot : electionTypes[etype].ballots[0].value
+    if (onChangeElection) onChangeElection(election, newBallot)
+  }
+
   return (
     <div className="md-list--drawer">
       <div className="md-grid">
@@ -50,13 +69,13 @@ const Settings = (props) => {
               menuItems={elections}
               fullWidth
               value={election}
-              onChange={value => onChangeElection ? onChangeElection(value) : null}
+              onChange={handleChangeElection}
             />
 
             <SelectField
               id="select-ballot"
               label="Ballot"
-              menuItems={[{value: 'nat', label: 'National'}, {value: 'prov', label: 'Provincial'}]}
+              menuItems={electionTypes[election.substr(0,3)].ballots}
               fullWidth
               value={ballot}
               onChange={value => onChangeBallot ? onChangeBallot(value) : null}
