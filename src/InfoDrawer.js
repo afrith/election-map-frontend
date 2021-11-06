@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Drawer, Toolbar, Button, DataTable, TableHeader, TableBody, TableRow, TableColumn, Paper, CircularProgress } from 'react-md'
 import Fetch from 'react-fetch-component'
+import { elections, ballots } from './params'
 
 const partyCompare = (a, b) => {
   if (a.votes !== b.votes) return b.votes - a.votes
@@ -21,10 +22,15 @@ const formatDec = x => Number(x).toLocaleString('en-GB', {
 const formatPerc = x => `${formatDec(x * 100)}%`;
 
 const DrawerContents = props => {
-  const { data } = props
+  const { data, election, ballot } = props
+
+  const election_name = elections.find(e => e.value === election).label
+  const ballot_name = ballots.find(b => b.value === ballot).label
+
   return <Fragment>
     <div className="md-cell md-cell--12">
-      <span className="md-title" style={{whiteSpace: 'normal'}}>{data.name}</span> <span className="md-subheading-2">({data.code})</span>
+      <div><span className="md-title" style={{whiteSpace: 'normal'}}>{data.name}</span> <span className="md-subheading-2">({data.code})</span></div>
+      <div className="md-subheading-2">{ballot_name} ballot in {election_name}</div>
     </div>
 
     <div className="md-cell md-cell--12">
@@ -122,7 +128,7 @@ export default class InfoDrawer extends Component {
             {({ loading, error, data }) => {
               if (loading) return <div className="md-cell md-cell--12"><CircularProgress /></div>
               else if (error) return <div className="md-cell md-cell--12">Error :(</div>
-              else return <DrawerContents data={data} />
+              else return <DrawerContents data={data} election={election} ballot={ballot} />
             }}
           </Fetch>}
         </div>

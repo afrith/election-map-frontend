@@ -6,32 +6,14 @@ import { legend as colorBlind } from './styles/colorBlind'
 import { legend as partySupport, partyList } from './styles/partySupport'
 import { legend as turnout } from './styles/turnout'
 
+import { elections, ballots, levels } from './params'
+
 import PlaceSearch from './PlaceSearch'
 
 const electionTypes = {
-  lge: {ballots: [{value: 'pr', label: 'PR'}, {value: 'ward', label: 'Ward'}]},
-  npe: {ballots: [{value: 'nat', label: 'National'}, {value: 'prov', label: 'Provincial'}]}
+  lge: {ballots: ballots.filter(b => b.electionType === 'lge')},
+  npe: {ballots: ballots.filter(b => b.electionType === 'npe')}
 }
-
-const elections = [
-  {value: 'lge2021', label: 'LGE 2021'},
-  {value: 'npe2019', label: 'NPE 2019'},
-  {value: 'lge2016', label: 'LGE 2016'},
-  {value: 'npe2014', label: 'NPE 2014'},
-  {value: 'lge2011', label: 'LGE 2011'},
-  {value: 'npe2009', label: 'NPE 2009'},
-  {value: 'lge2006', label: 'LGE 2006'},
-  {value: 'npe2004', label: 'NPE 2004'},
-  {value: 'lge2000', label: 'LGE 2000'}
-]
-
-const levels = [
-  {value: 'prov', label: 'Province'},
-  {value: 'dist', label: 'District council'},
-  {value: 'muni', label: 'Municipality'},
-  {value: 'ward', label: 'Ward'},
-  {value: 'vd', label: 'Voting district'}
-]
 
 const themes = [
   {value: 'leading', label: 'Leading party'},
