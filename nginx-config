@@ -1,0 +1,29 @@
+server {
+  listen       8000;
+  server_name  localhost;
+  location / {
+
+    gzip on;
+    gzip_disable "msie6";
+
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+    gzip_min_length 256;
+
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+    try_files $uri $uri/ /index.html =404;
+
+    expires 5m;
+    add_header Cache-Control "public";
+
+    location ~* ^/static {
+      expires max;
+      add_header Cache-Control "public, immutable";
+    }
+  }
+}
