@@ -2,10 +2,12 @@ export const ballots = [
   { value: 'pr', label: 'PR', electionType: 'lge' },
   { value: 'ward', label: 'Ward', electionType: 'lge' },
   { value: 'nat', label: 'National', electionType: 'npe' },
+  { value: 'reg', label: 'Regional', electionType: 'npe' },
   { value: 'prov', label: 'Provincial', electionType: 'npe' }
 ]
 
 export const elections = [
+  { value: 'npe2024', label: 'NPE 2024' },
   { value: 'lge2021', label: 'LGE 2021' },
   { value: 'npe2019', label: 'NPE 2019' },
   { value: 'lge2016', label: 'LGE 2016' },

@@ -27,7 +27,7 @@ export default class MainLayout extends Component {
     const settings = (
       <Settings 
         election={election} ballot={ballot} level={level} theme={theme}
-        onChangeElection={(election, ballot) => this._replacePath({election, ballot})}
+        onChangeElection={(election, ballot, theme) => this._replacePath({election, ballot, theme})}
         onChangeBallot={ballot => this._replacePath({ballot})}
         onChangeLevel={level => this._replacePath({level, selected: null})}
         onChangeTheme={theme => this._replacePath({theme})}
