@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { SelectField, Paper } from 'react-md'
 
-import { legend as leadingParty } from './styles/leadingParty'
+import { legend as leadingParty, legend2024 as leading2024 } from './styles/leadingParty'
 import { legend as colorBlind } from './styles/colorBlind'
 import { legend as partySupport, partyList } from './styles/partySupport'
 import { legend as turnout } from './styles/turnout'
@@ -17,6 +17,7 @@ const electionTypes = {
 
 const legends = {
   'leading': leadingParty,
+  leading2024,
   'leading-cb': colorBlind,
   'turnout': turnout
 }
@@ -95,7 +96,7 @@ const Settings = (props) => {
         <div className="md-cell md-cell--12">
           <Paper style={{padding:8}}>
             <h4>Legend</h4>
-            {legends[theme]}
+            {(election === 'npe2024' && theme === 'leading') ? legends.leading2024 : legends[theme]}
           </Paper>
         </div>
 
