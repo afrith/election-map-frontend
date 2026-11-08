@@ -7,6 +7,7 @@ export const ballots = [
 ]
 
 export const elections = [
+  { value: 'lge2026', label: 'LGE 2026' },
   { value: 'npe2024', label: 'NPE 2024' },
   { value: 'lge2021', label: 'LGE 2021' },
   { value: 'npe2019', label: 'NPE 2019' },

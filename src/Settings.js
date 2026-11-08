@@ -32,7 +32,7 @@ const Settings = (props) => {
   const handleChangeElection = election => {
     const allowedBallots = getAllowedBallots(election)
     const newBallot = allowedBallots.some(element => element.value === ballot) ? ballot : allowedBallots[0].value
-    const newTheme = (election !== 'npe2024' && theme === 'mk-support') ? 'leading' : theme
+    const newTheme = (election !== 'npe2024' && election !== 'lge2026' && theme === 'mk-support') ? 'leading' : theme
     if (onChangeElection) onChangeElection(election, newBallot, newTheme)
   }
 
@@ -43,7 +43,7 @@ const Settings = (props) => {
       {value: 'turnout', label: 'Turnout'}
     ]
     themes.push(...(partyList
-      .filter(row => (row.code !== 'mk' || election === 'npe2024'))
+      .filter(row => (row.code !== 'mk' || election === 'npe2024' || election === 'lge2026'))
       .map(row => ({value: `${row.code}-support`, label: `${row.abbr} support`}))
     ))
     console.log('THEMES', themes)
@@ -96,7 +96,7 @@ const Settings = (props) => {
         <div className="md-cell md-cell--12">
           <Paper style={{padding:8}}>
             <h4>Legend</h4>
-            {(election === 'npe2024' && theme === 'leading') ? legends.leading2024 : legends[theme]}
+            {((election === 'npe2024' || election === 'lge2026') && theme === 'leading') ? legends.leading2024 : legends[theme]}
           </Paper>
         </div>
 

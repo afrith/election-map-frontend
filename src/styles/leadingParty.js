@@ -8,7 +8,7 @@ const partyColors = [
 ]
 
 const extra2024 = [
-  {abbr: 'M.K.', displayAbbr: 'MKP', name: 'UMKHONTO WESIZWE', colors: ['rgb(253,208,162)', 'rgb(253,174,107)', 'rgb(253,141,60)', 'rgb(241,105,19)', 'rgb(217,72,1)', 'rgb(140,45,4)']}
+  {abbr: 'MKP', displayAbbr: 'MKP', name: 'UMKHONTO WESIZWE PARTY', colors: ['rgb(253,208,162)', 'rgb(253,174,107)', 'rgb(253,141,60)', 'rgb(241,105,19)', 'rgb(217,72,1)', 'rgb(140,45,4)']}
 ]
 
 const otherColors = ['rgb(217,217,217)', 'rgb(189,189,189)', 'rgb(150,150,150)', 'rgb(115,115,115)', 'rgb(82,82,82)', 'rgb(37,37,37)']
